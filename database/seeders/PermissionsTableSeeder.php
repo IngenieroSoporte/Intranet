@@ -1056,6 +1056,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 262,
+                'title' => 'importar_empleado_create',
+            ],
+            [
+                'id'    => 263,
+                'title' => 'importar_empleado_edit',
+            ],
+            [
+                'id'    => 264,
+                'title' => 'importar_empleado_show',
+            ],
+            [
+                'id'    => 265,
+                'title' => 'importar_empleado_delete',
+            ],
+            [
+                'id'    => 266,
+                'title' => 'importar_empleado_access',
+            ],
+            [
+                'id'    => 267,
                 'title' => 'profile_password_edit',
             ],
         ];

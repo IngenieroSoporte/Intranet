@@ -41,7 +41,6 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
-        'google_id',
         'remember_token',
         'created_at',
         'updated_at',

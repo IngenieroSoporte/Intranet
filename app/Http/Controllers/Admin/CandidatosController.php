@@ -23,7 +23,7 @@ class CandidatosController extends Controller
         abort_if(Gate::denies('candidato_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Candidato::with(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas'])->select(sprintf('%s.*', (new Candidato())->table));
+            $query = Candidato::with(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'created_by'])->select(sprintf('%s.*', (new Candidato())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -131,7 +131,7 @@ class CandidatosController extends Controller
 
         $ofimaticas = Ofimatica::pluck('nuevo', 'id');
 
-        $candidato->load('vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas');
+        $candidato->load('vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'created_by');
 
         return view('admin.candidatos.edit', compact('candidato', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'vacante_a_la_que_se_postulas'));
     }
@@ -150,7 +150,7 @@ class CandidatosController extends Controller
     {
         abort_if(Gate::denies('candidato_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $candidato->load('vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas');
+        $candidato->load('vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'created_by');
 
         return view('admin.candidatos.show', compact('candidato'));
     }

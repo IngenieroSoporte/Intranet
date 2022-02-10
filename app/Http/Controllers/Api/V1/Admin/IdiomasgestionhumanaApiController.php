@@ -17,7 +17,7 @@ class IdiomasgestionhumanaApiController extends Controller
     {
         abort_if(Gate::denies('idiomasgestionhumana_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IdiomasgestionhumanaResource(Idiomasgestionhumana::all());
+        return new IdiomasgestionhumanaResource(Idiomasgestionhumana::with(['created_by'])->get());
     }
 
     public function store(StoreIdiomasgestionhumanaRequest $request)
@@ -33,7 +33,7 @@ class IdiomasgestionhumanaApiController extends Controller
     {
         abort_if(Gate::denies('idiomasgestionhumana_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IdiomasgestionhumanaResource($idiomasgestionhumana);
+        return new IdiomasgestionhumanaResource($idiomasgestionhumana->load(['created_by']));
     }
 
     public function update(UpdateIdiomasgestionhumanaRequest $request, Idiomasgestionhumana $idiomasgestionhumana)

@@ -23,7 +23,7 @@ class DocumentosCandidatosController extends Controller
         abort_if(Gate::denies('documentos_candidato_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = DocumentosCandidato::query()->select(sprintf('%s.*', (new DocumentosCandidato())->table));
+            $query = DocumentosCandidato::with(['created_by'])->select(sprintf('%s.*', (new DocumentosCandidato())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -123,6 +123,8 @@ class DocumentosCandidatosController extends Controller
     {
         abort_if(Gate::denies('documentos_candidato_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $documentosCandidato->load('created_by');
+
         return view('admin.documentosCandidatos.edit', compact('documentosCandidato'));
     }
 
@@ -178,6 +180,8 @@ class DocumentosCandidatosController extends Controller
     public function show(DocumentosCandidato $documentosCandidato)
     {
         abort_if(Gate::denies('documentos_candidato_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $documentosCandidato->load('created_by');
 
         return view('admin.documentosCandidatos.show', compact('documentosCandidato'));
     }

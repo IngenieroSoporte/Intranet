@@ -10,12 +10,6 @@ use App\Http\Requests\UpdateReparacionRequest;
 use App\Models\FichaTecnica;
 use App\Models\Reparacion;
 use Gate;
-/***********************************************/
-use Illuminate\Foundation\Auth\User as AuthUser;
-use Illuminate\Support\Facades\Mail;
-use Laravel\Dusk\Http\Controllers\UserController;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-/*********************************************/
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -93,20 +87,6 @@ class ReparacionController extends Controller
     public function store(StoreReparacionRequest $request)
     {
         $reparacion = Reparacion::create($request->all());
-
-        $reparacion->save();
-        $dato = array(
-            'maintenance'=> $reparacion,
-        );
-
-        
-
-            Mail::send('email.reparacion', $dato, function($message){
-                $usuarios=array('coorsistemas@sanbartolome.edu.co', 'mantenimiento@sanbartolome.edu.co');
-                $message->from('intranet@sanbartolome.edu.co', 'SISTEMA INTRANET CMSB');
-                $message->to($usuarios)->subject('Mantenimiento Creado');
-            });
-
 
         return redirect()->route('admin.reparacions.index');
     }

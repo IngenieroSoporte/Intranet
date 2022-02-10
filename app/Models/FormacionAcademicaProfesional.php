@@ -4,6 +4,7 @@ namespace App\Models;
 
 use \DateTimeInterface;
 use App\Traits\Auditable;
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FormacionAcademicaProfesional extends Model
 {
     use SoftDeletes;
+    use MultiTenantModelTrait;
     use Auditable;
     use HasFactory;
 
@@ -37,6 +39,7 @@ class FormacionAcademicaProfesional extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'created_by_id',
     ];
 
     public function getFechaDeGraduacionAttribute($value)
@@ -47,6 +50,11 @@ class FormacionAcademicaProfesional extends Model
     public function setFechaDeGraduacionAttribute($value)
     {
         $this->attributes['fecha_de_graduacion'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -9,65 +9,46 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.proyectos-articulados.store") }}" enctype="multipart/form-data">
             @csrf
-
-            <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="titulo_del_trabajo">{{ trans('cruds.proyectosArticulado.fields.titulo_del_trabajo') }}</label>
-                        <input class="form-control {{ $errors->has('titulo_del_trabajo') ? 'is-invalid' : '' }}" type="text" name="titulo_del_trabajo" id="titulo_del_trabajo" value="{{ old('titulo_del_trabajo', '') }}" required>
-                        @if($errors->has('titulo_del_trabajo'))
-                            <span class="text-danger">{{ $errors->first('titulo_del_trabajo') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.titulo_del_trabajo_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="nombres_y_apellidos_de_los_autores_de_la_investigacion">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_de_los_autores_de_la_investigacion') }}</label>
-                        <input class="form-control {{ $errors->has('nombres_y_apellidos_de_los_autores_de_la_investigacion') ? 'is-invalid' : '' }}" type="text" name="nombres_y_apellidos_de_los_autores_de_la_investigacion" id="nombres_y_apellidos_de_los_autores_de_la_investigacion" value="{{ old('nombres_y_apellidos_de_los_autores_de_la_investigacion', '') }}" required>
-                        @if($errors->has('nombres_y_apellidos_de_los_autores_de_la_investigacion'))
-                            <span class="text-danger">{{ $errors->first('nombres_y_apellidos_de_los_autores_de_la_investigacion') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_de_los_autores_de_la_investigacion_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="nombres_y_apellidos_del_asesor_del_trabajo">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_del_asesor_del_trabajo') }}</label>
-                        <input class="form-control {{ $errors->has('nombres_y_apellidos_del_asesor_del_trabajo') ? 'is-invalid' : '' }}" type="text" name="nombres_y_apellidos_del_asesor_del_trabajo" id="nombres_y_apellidos_del_asesor_del_trabajo" value="{{ old('nombres_y_apellidos_del_asesor_del_trabajo', '') }}" required>
-                        @if($errors->has('nombres_y_apellidos_del_asesor_del_trabajo'))
-                            <span class="text-danger">{{ $errors->first('nombres_y_apellidos_del_asesor_del_trabajo') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_del_asesor_del_trabajo_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="ano_en_que_se_realizo_la_investigacion">{{ trans('cruds.proyectosArticulado.fields.ano_en_que_se_realizo_la_investigacion') }}</label>
-                        <input class="form-control date {{ $errors->has('ano_en_que_se_realizo_la_investigacion') ? 'is-invalid' : '' }}" type="text" name="ano_en_que_se_realizo_la_investigacion" id="ano_en_que_se_realizo_la_investigacion" value="{{ old('ano_en_que_se_realizo_la_investigacion') }}" required>
-                        @if($errors->has('ano_en_que_se_realizo_la_investigacion'))
-                            <span class="text-danger">{{ $errors->first('ano_en_que_se_realizo_la_investigacion') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.ano_en_que_se_realizo_la_investigacion_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="linea_de_investigacion">{{ trans('cruds.proyectosArticulado.fields.linea_de_investigacion') }}</label>
-                        <input class="form-control {{ $errors->has('linea_de_investigacion') ? 'is-invalid' : '' }}" type="text" name="linea_de_investigacion" id="linea_de_investigacion" value="{{ old('linea_de_investigacion', '') }}" required>
-                        @if($errors->has('linea_de_investigacion'))
-                            <span class="text-danger">{{ $errors->first('linea_de_investigacion') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.linea_de_investigacion_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group">
+                <label class="required" for="titulo_del_trabajo">{{ trans('cruds.proyectosArticulado.fields.titulo_del_trabajo') }}</label>
+                <input class="form-control {{ $errors->has('titulo_del_trabajo') ? 'is-invalid' : '' }}" type="text" name="titulo_del_trabajo" id="titulo_del_trabajo" value="{{ old('titulo_del_trabajo', '') }}" required>
+                @if($errors->has('titulo_del_trabajo'))
+                    <span class="text-danger">{{ $errors->first('titulo_del_trabajo') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.titulo_del_trabajo_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="nombres_y_apellidos_de_los_autores_de_la_investigacion">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_de_los_autores_de_la_investigacion') }}</label>
+                <input class="form-control {{ $errors->has('nombres_y_apellidos_de_los_autores_de_la_investigacion') ? 'is-invalid' : '' }}" type="text" name="nombres_y_apellidos_de_los_autores_de_la_investigacion" id="nombres_y_apellidos_de_los_autores_de_la_investigacion" value="{{ old('nombres_y_apellidos_de_los_autores_de_la_investigacion', '') }}" required>
+                @if($errors->has('nombres_y_apellidos_de_los_autores_de_la_investigacion'))
+                    <span class="text-danger">{{ $errors->first('nombres_y_apellidos_de_los_autores_de_la_investigacion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_de_los_autores_de_la_investigacion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="nombres_y_apellidos_del_asesor_del_trabajo">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_del_asesor_del_trabajo') }}</label>
+                <input class="form-control {{ $errors->has('nombres_y_apellidos_del_asesor_del_trabajo') ? 'is-invalid' : '' }}" type="text" name="nombres_y_apellidos_del_asesor_del_trabajo" id="nombres_y_apellidos_del_asesor_del_trabajo" value="{{ old('nombres_y_apellidos_del_asesor_del_trabajo', '') }}" required>
+                @if($errors->has('nombres_y_apellidos_del_asesor_del_trabajo'))
+                    <span class="text-danger">{{ $errors->first('nombres_y_apellidos_del_asesor_del_trabajo') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.nombres_y_apellidos_del_asesor_del_trabajo_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="ano_en_que_se_realizo_la_investigacion">{{ trans('cruds.proyectosArticulado.fields.ano_en_que_se_realizo_la_investigacion') }}</label>
+                <input class="form-control date {{ $errors->has('ano_en_que_se_realizo_la_investigacion') ? 'is-invalid' : '' }}" type="text" name="ano_en_que_se_realizo_la_investigacion" id="ano_en_que_se_realizo_la_investigacion" value="{{ old('ano_en_que_se_realizo_la_investigacion') }}" required>
+                @if($errors->has('ano_en_que_se_realizo_la_investigacion'))
+                    <span class="text-danger">{{ $errors->first('ano_en_que_se_realizo_la_investigacion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.ano_en_que_se_realizo_la_investigacion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="linea_de_investigacion">{{ trans('cruds.proyectosArticulado.fields.linea_de_investigacion') }}</label>
+                <input class="form-control {{ $errors->has('linea_de_investigacion') ? 'is-invalid' : '' }}" type="text" name="linea_de_investigacion" id="linea_de_investigacion" value="{{ old('linea_de_investigacion', '') }}" required>
+                @if($errors->has('linea_de_investigacion'))
+                    <span class="text-danger">{{ $errors->first('linea_de_investigacion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.proyectosArticulado.fields.linea_de_investigacion_helper') }}</span>
+            </div>
             <div class="form-group">
                 <label class="required" for="abstract_resumen_documental">{{ trans('cruds.proyectosArticulado.fields.abstract_resumen_documental') }}</label>
                 <textarea class="form-control {{ $errors->has('abstract_resumen_documental') ? 'is-invalid' : '' }}" name="abstract_resumen_documental" id="abstract_resumen_documental" required>{{ old('abstract_resumen_documental') }}</textarea>
