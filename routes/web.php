@@ -1,14 +1,5 @@
 <?php
 
-use App\Http\Controllers\ActivarController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GoogleController;
-use App\Notifications\NuevoTicket;
-use Doctrine\DBAL\Schema\Index;
-use Illuminate\Support\Facades\Mail;
-
-use App\Http\Controllers\ProjectsController;
-
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -254,6 +245,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('formacion-academica-profesionals/destroy', 'FormacionAcademicaProfesionalController@massDestroy')->name('formacion-academica-profesionals.massDestroy');
     Route::resource('formacion-academica-profesionals', 'FormacionAcademicaProfesionalController');
 
+    // Importar Empleados
+    Route::delete('importar-empleados/destroy', 'ImportarEmpleadosController@massDestroy')->name('importar-empleados.massDestroy');
+    Route::post('importar-empleados/parse-csv-import', 'ImportarEmpleadosController@parseCsvImport')->name('importar-empleados.parseCsvImport');
+    Route::post('importar-empleados/process-csv-import', 'ImportarEmpleadosController@processCsvImport')->name('importar-empleados.processCsvImport');
+    Route::resource('importar-empleados', 'ImportarEmpleadosController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');
@@ -274,15 +271,3 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::post('profile/destroy', 'ChangePasswordController@destroy')->name('password.destroyProfile');
     }
 });
-
-
-// Ruta para enviar los datos de empleos a la vista
-Route::get('/vacantes', 'VacantesController@index');
-
-// Ruta para enviar los datos de proyectos articulados a la vista
-Route::get('/proyectos', 'ProjectsController@index');
-
-// Laravel Socialite
-
-Route::get('auth/google', [GoogleController::class, 'googleRedirect']);
-Route::get('auth/google/callback', [GoogleController::class, 'googleCallback']);

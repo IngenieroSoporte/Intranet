@@ -17,7 +17,7 @@ class CandidatosApiController extends Controller
     {
         abort_if(Gate::denies('candidato_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CandidatoResource(Candidato::with(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas'])->get());
+        return new CandidatoResource(Candidato::with(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'created_by'])->get());
     }
 
     public function store(StoreCandidatoRequest $request)
@@ -36,7 +36,7 @@ class CandidatosApiController extends Controller
     {
         abort_if(Gate::denies('candidato_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CandidatoResource($candidato->load(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas']));
+        return new CandidatoResource($candidato->load(['vacante_a_la_que_se_postula', 'formacion_academica_profesionals', 'idiomas', 'ofimaticas', 'created_by']));
     }
 
     public function update(UpdateCandidatoRequest $request, Candidato $candidato)

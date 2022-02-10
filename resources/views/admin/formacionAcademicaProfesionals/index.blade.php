@@ -3,8 +3,8 @@
 @can('formacion_academica_profesional_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success ml-3" href="{{ route('admin.formacion-academica-profesionals.create') }}">
-                {{ trans('global.add') }}
+            <a class="btn btn-success" href="{{ route('admin.formacion-academica-profesionals.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.formacionAcademicaProfesional.title_singular') }}
             </a>
         </div>
     </div>

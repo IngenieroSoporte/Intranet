@@ -17,7 +17,7 @@ class OfimaticaApiController extends Controller
     {
         abort_if(Gate::denies('ofimatica_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new OfimaticaResource(Ofimatica::all());
+        return new OfimaticaResource(Ofimatica::with(['created_by'])->get());
     }
 
     public function store(StoreOfimaticaRequest $request)
@@ -33,7 +33,7 @@ class OfimaticaApiController extends Controller
     {
         abort_if(Gate::denies('ofimatica_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new OfimaticaResource($ofimatica);
+        return new OfimaticaResource($ofimatica->load(['created_by']));
     }
 
     public function update(UpdateOfimaticaRequest $request, Ofimatica $ofimatica)

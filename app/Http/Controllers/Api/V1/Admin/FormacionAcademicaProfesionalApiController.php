@@ -17,7 +17,7 @@ class FormacionAcademicaProfesionalApiController extends Controller
     {
         abort_if(Gate::denies('formacion_academica_profesional_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new FormacionAcademicaProfesionalResource(FormacionAcademicaProfesional::all());
+        return new FormacionAcademicaProfesionalResource(FormacionAcademicaProfesional::with(['created_by'])->get());
     }
 
     public function store(StoreFormacionAcademicaProfesionalRequest $request)
@@ -33,7 +33,7 @@ class FormacionAcademicaProfesionalApiController extends Controller
     {
         abort_if(Gate::denies('formacion_academica_profesional_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new FormacionAcademicaProfesionalResource($formacionAcademicaProfesional);
+        return new FormacionAcademicaProfesionalResource($formacionAcademicaProfesional->load(['created_by']));
     }
 
     public function update(UpdateFormacionAcademicaProfesionalRequest $request, FormacionAcademicaProfesional $formacionAcademicaProfesional)

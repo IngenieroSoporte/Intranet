@@ -19,7 +19,7 @@ class OfimaticaController extends Controller
         abort_if(Gate::denies('ofimatica_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Ofimatica::query()->select(sprintf('%s.*', (new Ofimatica())->table));
+            $query = Ofimatica::with(['created_by'])->select(sprintf('%s.*', (new Ofimatica())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -79,6 +79,8 @@ class OfimaticaController extends Controller
     {
         abort_if(Gate::denies('ofimatica_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $ofimatica->load('created_by');
+
         return view('admin.ofimaticas.edit', compact('ofimatica'));
     }
 
@@ -92,6 +94,8 @@ class OfimaticaController extends Controller
     public function show(Ofimatica $ofimatica)
     {
         abort_if(Gate::denies('ofimatica_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $ofimatica->load('created_by');
 
         return view('admin.ofimaticas.show', compact('ofimatica'));
     }

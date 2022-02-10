@@ -13,11 +13,6 @@ use App\Models\Prioridad;
 use App\Models\Sede;
 use App\Models\Ticket;
 use Gate;
-
-use Illuminate\Foundation\Auth\User as AuthUser;
-use Illuminate\Support\Facades\Mail;
-use Laravel\Dusk\Http\Controllers\UserController;
-
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -120,21 +115,6 @@ class TicketsController extends Controller
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $ticket->id]);
         }
-
-        $ticket->save();
-        $data = array(
-            'ticket'=> $ticket,
-        
-        );
-
-        
-
-            Mail::send('email.ticket', $data, function($message){
-                $usuarios=array('coorsistemas@sanbartolome.edu.co','Walter.rivera@sanbartolome.edu.co','tecnicosoporte@sanbartolome.edu.co',
-                'tecnicosoporte2@sanbartolome.edu.co','tecnicosoporte3@sanbartolome.edu.co', 'mantenimiento@sanbartolome.edu.co');
-                $message->from('intranet@sanbartolome.edu.co', 'SISTEMA DE TICKETS INTRANET CMSB');
-                $message->to($usuarios)->subject('Incidente Creado');
-            });
 
         return redirect()->route('admin.tickets.index');
     }

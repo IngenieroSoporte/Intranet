@@ -19,7 +19,7 @@ class IdiomasgestionhumanaController extends Controller
         abort_if(Gate::denies('idiomasgestionhumana_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Idiomasgestionhumana::query()->select(sprintf('%s.*', (new Idiomasgestionhumana())->table));
+            $query = Idiomasgestionhumana::with(['created_by'])->select(sprintf('%s.*', (new Idiomasgestionhumana())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -79,6 +79,8 @@ class IdiomasgestionhumanaController extends Controller
     {
         abort_if(Gate::denies('idiomasgestionhumana_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $idiomasgestionhumana->load('created_by');
+
         return view('admin.idiomasgestionhumanas.edit', compact('idiomasgestionhumana'));
     }
 
@@ -93,7 +95,7 @@ class IdiomasgestionhumanaController extends Controller
     {
         abort_if(Gate::denies('idiomasgestionhumana_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $idiomasgestionhumana->load('idiomaCandidatos');
+        $idiomasgestionhumana->load('created_by', 'idiomaCandidatos');
 
         return view('admin.idiomasgestionhumanas.show', compact('idiomasgestionhumana'));
     }

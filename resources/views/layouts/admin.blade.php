@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Fundación Colegio Mayor de San Bartolomé</title>
+    <title>{{ trans('panel.site_title') }}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -108,8 +108,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-              <b>Elaborado por:  Cristian Andres Prieto J.</b> <br>
-              <b>Version</b> 1.1
+                <b>Version</b> 3.0.0-alpha
             </div>
             <strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
         </footer>

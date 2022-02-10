@@ -20,7 +20,7 @@ class DocumentosCandidatosApiController extends Controller
     {
         abort_if(Gate::denies('documentos_candidato_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new DocumentosCandidatoResource(DocumentosCandidato::all());
+        return new DocumentosCandidatoResource(DocumentosCandidato::with(['created_by'])->get());
     }
 
     public function store(StoreDocumentosCandidatoRequest $request)
@@ -48,7 +48,7 @@ class DocumentosCandidatosApiController extends Controller
     {
         abort_if(Gate::denies('documentos_candidato_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new DocumentosCandidatoResource($documentosCandidato);
+        return new DocumentosCandidatoResource($documentosCandidato->load(['created_by']));
     }
 
     public function update(UpdateDocumentosCandidatoRequest $request, DocumentosCandidato $documentosCandidato)

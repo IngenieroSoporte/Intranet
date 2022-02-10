@@ -4,12 +4,14 @@ namespace App\Models;
 
 use \DateTimeInterface;
 use App\Traits\Auditable;
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidato extends Model
 {
+    use MultiTenantModelTrait;
     use Auditable;
     use HasFactory;
 
@@ -54,6 +56,7 @@ class Candidato extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'created_by_id',
     ];
 
     public function vacante_a_la_que_se_postula()
@@ -104,6 +107,11 @@ class Candidato extends Model
     public function ofimaticas()
     {
         return $this->belongsToMany(Ofimatica::class);
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

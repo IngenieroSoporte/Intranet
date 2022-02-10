@@ -11,12 +11,6 @@ use App\Models\Agente;
 use App\Models\FichasTecnica;
 use App\Models\Maintenance;
 use Gate;
-/***********************************************/
-use Illuminate\Foundation\Auth\User as AuthUser;
-use Illuminate\Support\Facades\Mail;
-use Laravel\Dusk\Http\Controllers\UserController;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-/*********************************************/
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -101,21 +95,6 @@ class MaintenanceController extends Controller
     public function store(StoreMaintenanceRequest $request)
     {
         $maintenance = Maintenance::create($request->all());
-
-
-        $maintenance->save();
-        $dato = array(
-            'maintenance'=> $maintenance,
-        );
-
-        
-
-            Mail::send('email.mantenimiento', $dato, function($message){
-                $usuarios=array('coorsistemas@sanbartolome.edu.co','Walter.rivera@sanbartolome.edu.co','tecnicosoporte@sanbartolome.edu.co',
-                'tecnicosoporte2@sanbartolome.edu.co','tecnicosoporte3@sanbartolome.edu.co');
-                $message->from('intranet@sanbartolome.edu.co', 'SISTEMA INTRANET CMSB');
-                $message->to($usuarios)->subject('Mantenimiento Creado');
-            });
 
         return redirect()->route('admin.maintenances.index');
     }

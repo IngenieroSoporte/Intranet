@@ -21,155 +21,108 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.candidato.fields.vacante_a_la_que_se_postula_helper') }}</span>
             </div>
-
-            <h5 class="text-center my-3 font-weight-bold">INFORMACIÒN PERSONAL</h5>
-
-            <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="primer_apellido">{{ trans('cruds.candidato.fields.primer_apellido') }}</label>
-                        <input class="form-control {{ $errors->has('primer_apellido') ? 'is-invalid' : '' }}" type="text" name="primer_apellido" id="primer_apellido" value="{{ old('primer_apellido', '') }}" required>
-                        @if($errors->has('primer_apellido'))
-                            <span class="text-danger">{{ $errors->first('primer_apellido') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.primer_apellido_helper') }}</span>
+            <div class="form-group">
+                <label class="required" for="primer_apellido">{{ trans('cruds.candidato.fields.primer_apellido') }}</label>
+                <input class="form-control {{ $errors->has('primer_apellido') ? 'is-invalid' : '' }}" type="text" name="primer_apellido" id="primer_apellido" value="{{ old('primer_apellido', '') }}" required>
+                @if($errors->has('primer_apellido'))
+                    <span class="text-danger">{{ $errors->first('primer_apellido') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.primer_apellido_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="segundo_apellido">{{ trans('cruds.candidato.fields.segundo_apellido') }}</label>
+                <input class="form-control {{ $errors->has('segundo_apellido') ? 'is-invalid' : '' }}" type="text" name="segundo_apellido" id="segundo_apellido" value="{{ old('segundo_apellido', '') }}" required>
+                @if($errors->has('segundo_apellido'))
+                    <span class="text-danger">{{ $errors->first('segundo_apellido') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.segundo_apellido_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="nombres">{{ trans('cruds.candidato.fields.nombres') }}</label>
+                <input class="form-control {{ $errors->has('nombres') ? 'is-invalid' : '' }}" type="text" name="nombres" id="nombres" value="{{ old('nombres', '') }}" required>
+                @if($errors->has('nombres'))
+                    <span class="text-danger">{{ $errors->first('nombres') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.nombres_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required">{{ trans('cruds.candidato.fields.documento_de_identidad') }}</label>
+                @foreach(App\Models\Candidato::DOCUMENTO_DE_IDENTIDAD_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('documento_de_identidad') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="documento_de_identidad_{{ $key }}" name="documento_de_identidad" value="{{ $key }}" {{ old('documento_de_identidad', '') === (string) $key ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="documento_de_identidad_{{ $key }}">{{ $label }}</label>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="segundo_apellido">{{ trans('cruds.candidato.fields.segundo_apellido') }}</label>
-                        <input class="form-control {{ $errors->has('segundo_apellido') ? 'is-invalid' : '' }}" type="text" name="segundo_apellido" id="segundo_apellido" value="{{ old('segundo_apellido', '') }}" required>
-                        @if($errors->has('segundo_apellido'))
-                            <span class="text-danger">{{ $errors->first('segundo_apellido') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.segundo_apellido_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="nombres">{{ trans('cruds.candidato.fields.nombres') }}</label>
-                        <input class="form-control {{ $errors->has('nombres') ? 'is-invalid' : '' }}" type="text" name="nombres" id="nombres" value="{{ old('nombres', '') }}" required>
-                        @if($errors->has('nombres'))
-                            <span class="text-danger">{{ $errors->first('nombres') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.nombres_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required">{{ trans('cruds.candidato.fields.documento_de_identidad') }}</label>
-                        @foreach(App\Models\Candidato::DOCUMENTO_DE_IDENTIDAD_RADIO as $key => $label)
-                            <div class="form-check {{ $errors->has('documento_de_identidad') ? 'is-invalid' : '' }}">
-                                <input class="form-check-input" type="radio" id="documento_de_identidad_{{ $key }}" name="documento_de_identidad" value="{{ $key }}" {{ old('documento_de_identidad', '') === (string) $key ? 'checked' : '' }} required>
-                                <label class="form-check-label" for="documento_de_identidad_{{ $key }}">{{ $label }}</label>
-                            </div>
-                        @endforeach
-                        @if($errors->has('documento_de_identidad'))
-                            <span class="text-danger">{{ $errors->first('documento_de_identidad') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.documento_de_identidad_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="no_de_identificacion">{{ trans('cruds.candidato.fields.no_de_identificacion') }}</label>
-                        <input class="form-control {{ $errors->has('no_de_identificacion') ? 'is-invalid' : '' }}" type="number" name="no_de_identificacion" id="no_de_identificacion" value="{{ old('no_de_identificacion', '') }}" step="0.1" required>
-                        @if($errors->has('no_de_identificacion'))
-                            <span class="text-danger">{{ $errors->first('no_de_identificacion') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.no_de_identificacion_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="fecha_de_expedicion_del_documento">{{ trans('cruds.candidato.fields.fecha_de_expedicion_del_documento') }}</label>
-                        <input class="form-control date {{ $errors->has('fecha_de_expedicion_del_documento') ? 'is-invalid' : '' }}" type="text" name="fecha_de_expedicion_del_documento" id="fecha_de_expedicion_del_documento" value="{{ old('fecha_de_expedicion_del_documento') }}" required>
-                        @if($errors->has('fecha_de_expedicion_del_documento'))
-                            <span class="text-danger">{{ $errors->first('fecha_de_expedicion_del_documento') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.fecha_de_expedicion_del_documento_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="fecha_de_nacimiento">{{ trans('cruds.candidato.fields.fecha_de_nacimiento') }}</label>
-                        <input class="form-control date {{ $errors->has('fecha_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="fecha_de_nacimiento" id="fecha_de_nacimiento" value="{{ old('fecha_de_nacimiento') }}" required>
-                        @if($errors->has('fecha_de_nacimiento'))
-                            <span class="text-danger">{{ $errors->first('fecha_de_nacimiento') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.fecha_de_nacimiento_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="departamento_de_nacimiento">{{ trans('cruds.candidato.fields.departamento_de_nacimiento') }}</label>
-                        <input class="form-control {{ $errors->has('departamento_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="departamento_de_nacimiento" id="departamento_de_nacimiento" value="{{ old('departamento_de_nacimiento', '') }}" required>
-                        @if($errors->has('departamento_de_nacimiento'))
-                            <span class="text-danger">{{ $errors->first('departamento_de_nacimiento') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.departamento_de_nacimiento_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="ciudad_de_nacimiento">{{ trans('cruds.candidato.fields.ciudad_de_nacimiento') }}</label>
-                        <input class="form-control {{ $errors->has('ciudad_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="ciudad_de_nacimiento" id="ciudad_de_nacimiento" value="{{ old('ciudad_de_nacimiento', '') }}" required>
-                        @if($errors->has('ciudad_de_nacimiento'))
-                            <span class="text-danger">{{ $errors->first('ciudad_de_nacimiento') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.ciudad_de_nacimiento_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="direccion">{{ trans('cruds.candidato.fields.direccion') }}</label>
-                        <input class="form-control {{ $errors->has('direccion') ? 'is-invalid' : '' }}" type="text" name="direccion" id="direccion" value="{{ old('direccion', '') }}" required>
-                        @if($errors->has('direccion'))
-                            <span class="text-danger">{{ $errors->first('direccion') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.direccion_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="telefono_personal">{{ trans('cruds.candidato.fields.telefono_personal') }}</label>
-                        <input class="form-control {{ $errors->has('telefono_personal') ? 'is-invalid' : '' }}" type="text" name="telefono_personal" id="telefono_personal" value="{{ old('telefono_personal', '') }}" required>
-                        @if($errors->has('telefono_personal'))
-                            <span class="text-danger">{{ $errors->first('telefono_personal') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.telefono_personal_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="celular_personal">{{ trans('cruds.candidato.fields.celular_personal') }}</label>
-                        <input class="form-control {{ $errors->has('celular_personal') ? 'is-invalid' : '' }}" type="text" name="celular_personal" id="celular_personal" value="{{ old('celular_personal', '') }}" required>
-                        @if($errors->has('celular_personal'))
-                            <span class="text-danger">{{ $errors->first('celular_personal') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.celular_personal_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
+                @endforeach
+                @if($errors->has('documento_de_identidad'))
+                    <span class="text-danger">{{ $errors->first('documento_de_identidad') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.documento_de_identidad_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="no_de_identificacion">{{ trans('cruds.candidato.fields.no_de_identificacion') }}</label>
+                <input class="form-control {{ $errors->has('no_de_identificacion') ? 'is-invalid' : '' }}" type="number" name="no_de_identificacion" id="no_de_identificacion" value="{{ old('no_de_identificacion', '') }}" step="0.1" required>
+                @if($errors->has('no_de_identificacion'))
+                    <span class="text-danger">{{ $errors->first('no_de_identificacion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.no_de_identificacion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="fecha_de_expedicion_del_documento">{{ trans('cruds.candidato.fields.fecha_de_expedicion_del_documento') }}</label>
+                <input class="form-control date {{ $errors->has('fecha_de_expedicion_del_documento') ? 'is-invalid' : '' }}" type="text" name="fecha_de_expedicion_del_documento" id="fecha_de_expedicion_del_documento" value="{{ old('fecha_de_expedicion_del_documento') }}" required>
+                @if($errors->has('fecha_de_expedicion_del_documento'))
+                    <span class="text-danger">{{ $errors->first('fecha_de_expedicion_del_documento') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.fecha_de_expedicion_del_documento_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="fecha_de_nacimiento">{{ trans('cruds.candidato.fields.fecha_de_nacimiento') }}</label>
+                <input class="form-control date {{ $errors->has('fecha_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="fecha_de_nacimiento" id="fecha_de_nacimiento" value="{{ old('fecha_de_nacimiento') }}" required>
+                @if($errors->has('fecha_de_nacimiento'))
+                    <span class="text-danger">{{ $errors->first('fecha_de_nacimiento') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.fecha_de_nacimiento_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="departamento_de_nacimiento">{{ trans('cruds.candidato.fields.departamento_de_nacimiento') }}</label>
+                <input class="form-control {{ $errors->has('departamento_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="departamento_de_nacimiento" id="departamento_de_nacimiento" value="{{ old('departamento_de_nacimiento', '') }}" required>
+                @if($errors->has('departamento_de_nacimiento'))
+                    <span class="text-danger">{{ $errors->first('departamento_de_nacimiento') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.departamento_de_nacimiento_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="ciudad_de_nacimiento">{{ trans('cruds.candidato.fields.ciudad_de_nacimiento') }}</label>
+                <input class="form-control {{ $errors->has('ciudad_de_nacimiento') ? 'is-invalid' : '' }}" type="text" name="ciudad_de_nacimiento" id="ciudad_de_nacimiento" value="{{ old('ciudad_de_nacimiento', '') }}" required>
+                @if($errors->has('ciudad_de_nacimiento'))
+                    <span class="text-danger">{{ $errors->first('ciudad_de_nacimiento') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.ciudad_de_nacimiento_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="direccion">{{ trans('cruds.candidato.fields.direccion') }}</label>
+                <input class="form-control {{ $errors->has('direccion') ? 'is-invalid' : '' }}" type="text" name="direccion" id="direccion" value="{{ old('direccion', '') }}" required>
+                @if($errors->has('direccion'))
+                    <span class="text-danger">{{ $errors->first('direccion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.direccion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="telefono_personal">{{ trans('cruds.candidato.fields.telefono_personal') }}</label>
+                <input class="form-control {{ $errors->has('telefono_personal') ? 'is-invalid' : '' }}" type="text" name="telefono_personal" id="telefono_personal" value="{{ old('telefono_personal', '') }}" required>
+                @if($errors->has('telefono_personal'))
+                    <span class="text-danger">{{ $errors->first('telefono_personal') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.telefono_personal_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="celular_personal">{{ trans('cruds.candidato.fields.celular_personal') }}</label>
+                <input class="form-control {{ $errors->has('celular_personal') ? 'is-invalid' : '' }}" type="text" name="celular_personal" id="celular_personal" value="{{ old('celular_personal', '') }}" required>
+                @if($errors->has('celular_personal'))
+                    <span class="text-danger">{{ $errors->first('celular_personal') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.celular_personal_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="email_personal">{{ trans('cruds.candidato.fields.email_personal') }}</label>
                 <input class="form-control {{ $errors->has('email_personal') ? 'is-invalid' : '' }}" type="email" name="email_personal" id="email_personal" value="{{ old('email_personal') }}" required>
                 @if($errors->has('email_personal'))
@@ -177,46 +130,30 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.candidato.fields.email_personal_helper') }}</span>
             </div>
-
-            <h5 class="text-center my-3 font-weight-bold">INFORMACIÒN FAMILIAR</h5>
-
-            <div class="container-fluoid">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="telefono_familiar">{{ trans('cruds.candidato.fields.telefono_familiar') }}</label>
-                        <input class="form-control {{ $errors->has('telefono_familiar') ? 'is-invalid' : '' }}" type="text" name="telefono_familiar" id="telefono_familiar" value="{{ old('telefono_familiar', '') }}" required>
-                        @if($errors->has('telefono_familiar'))
-                            <span class="text-danger">{{ $errors->first('telefono_familiar') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.telefono_familiar_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="celular_familiar">{{ trans('cruds.candidato.fields.celular_familiar') }}</label>
-                        <input class="form-control {{ $errors->has('celular_familiar') ? 'is-invalid' : '' }}" type="text" name="celular_familiar" id="celular_familiar" value="{{ old('celular_familiar', '') }}" required>
-                        @if($errors->has('celular_familiar'))
-                            <span class="text-danger">{{ $errors->first('celular_familiar') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.celular_familiar_helper') }}</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                        <label class="required" for="email_familiar">{{ trans('cruds.candidato.fields.email_familiar') }}</label>
-                        <input class="form-control {{ $errors->has('email_familiar') ? 'is-invalid' : '' }}" type="email" name="email_familiar" id="email_familiar" value="{{ old('email_familiar') }}" required>
-                        @if($errors->has('email_familiar'))
-                            <span class="text-danger">{{ $errors->first('email_familiar') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.candidato.fields.email_familiar_helper') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <h5 class="text-center my-3 font-weight-bold">INFORMACIÒN ACADEMICA</h5>
-            
+            <div class="form-group">
+                <label class="required" for="telefono_familiar">{{ trans('cruds.candidato.fields.telefono_familiar') }}</label>
+                <input class="form-control {{ $errors->has('telefono_familiar') ? 'is-invalid' : '' }}" type="text" name="telefono_familiar" id="telefono_familiar" value="{{ old('telefono_familiar', '') }}" required>
+                @if($errors->has('telefono_familiar'))
+                    <span class="text-danger">{{ $errors->first('telefono_familiar') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.telefono_familiar_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="celular_familiar">{{ trans('cruds.candidato.fields.celular_familiar') }}</label>
+                <input class="form-control {{ $errors->has('celular_familiar') ? 'is-invalid' : '' }}" type="text" name="celular_familiar" id="celular_familiar" value="{{ old('celular_familiar', '') }}" required>
+                @if($errors->has('celular_familiar'))
+                    <span class="text-danger">{{ $errors->first('celular_familiar') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.celular_familiar_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="email_familiar">{{ trans('cruds.candidato.fields.email_familiar') }}</label>
+                <input class="form-control {{ $errors->has('email_familiar') ? 'is-invalid' : '' }}" type="email" name="email_familiar" id="email_familiar" value="{{ old('email_familiar') }}" required>
+                @if($errors->has('email_familiar'))
+                    <span class="text-danger">{{ $errors->first('email_familiar') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.candidato.fields.email_familiar_helper') }}</span>
+            </div>
             <div class="form-group">
                 <label for="secundaria">{{ trans('cruds.candidato.fields.secundaria') }}</label>
                 <input class="form-control {{ $errors->has('secundaria') ? 'is-invalid' : '' }}" type="text" name="secundaria" id="secundaria" value="{{ old('secundaria', '') }}">
@@ -265,7 +202,6 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.candidato.fields.formacion_academica_profesional_helper') }}</span>
             </div>
-            <h5 class="text-center my-3 font-weight-bold">IDIOMAS</h5>
             <div class="form-group">
                 <label for="idiomas">{{ trans('cruds.candidato.fields.idioma') }}</label>
                 <div style="padding-bottom: 4px">
@@ -282,8 +218,6 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.candidato.fields.idioma_helper') }}</span>
             </div>
-
-            <h5 class="text-center my-3 font-weight-bold">OFIMÀTICA</h5>
             <div class="form-group">
                 <label for="ofimaticas">{{ trans('cruds.candidato.fields.ofimatica') }}</label>
                 <div style="padding-bottom: 4px">

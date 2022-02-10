@@ -19,7 +19,7 @@ class FormacionAcademicaProfesionalController extends Controller
         abort_if(Gate::denies('formacion_academica_profesional_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = FormacionAcademicaProfesional::query()->select(sprintf('%s.*', (new FormacionAcademicaProfesional())->table));
+            $query = FormacionAcademicaProfesional::with(['created_by'])->select(sprintf('%s.*', (new FormacionAcademicaProfesional())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -76,6 +76,8 @@ class FormacionAcademicaProfesionalController extends Controller
     {
         abort_if(Gate::denies('formacion_academica_profesional_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $formacionAcademicaProfesional->load('created_by');
+
         return view('admin.formacionAcademicaProfesionals.edit', compact('formacionAcademicaProfesional'));
     }
 
@@ -89,6 +91,8 @@ class FormacionAcademicaProfesionalController extends Controller
     public function show(FormacionAcademicaProfesional $formacionAcademicaProfesional)
     {
         abort_if(Gate::denies('formacion_academica_profesional_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $formacionAcademicaProfesional->load('created_by');
 
         return view('admin.formacionAcademicaProfesionals.show', compact('formacionAcademicaProfesional'));
     }

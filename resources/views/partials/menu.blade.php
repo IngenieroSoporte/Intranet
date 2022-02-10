@@ -1,18 +1,8 @@
-<aside class="main-sidebar bg-danger elevation-4" style="min-height: 917px;">
-
-<!-- Estilos para el hover del menù -->
-<style>        
-    a:hover {
-    background-color:#0B82EC ;
-}
-</style>
-
-<!-- Fin del hover -->
-
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
-    <div class="brand-link text-center">
-        <p>CMSB</p>        
-     </div>
+    <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">{{ trans('panel.site_title') }}</span>
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -94,7 +84,7 @@
                     </li>
                 @endcan
                 @can('gestion_humana_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/hojas-de-vidas*") ? "menu-open" : "" }} {{ request()->is("admin/empleos*") ? "menu-open" : "" }} {{ request()->is("admin/sg-ssts*") ? "menu-open" : "" }} {{ request()->is("admin/plan-de-formacions*") ? "menu-open" : "" }} {{ request()->is("admin/evaluacion-de-desempenos*") ? "menu-open" : "" }} {{ request()->is("admin/certificado-laborals*") ? "menu-open" : "" }} {{ request()->is("admin/cerficadodefunciones*") ? "menu-open" : "" }} {{ request()->is("admin/*") ? "menu-open" : "" }}">
+                    <li class="nav-item has-treeview {{ request()->is("admin/importar-empleados*") ? "menu-open" : "" }} {{ request()->is("admin/hojas-de-vidas*") ? "menu-open" : "" }} {{ request()->is("admin/empleos*") ? "menu-open" : "" }} {{ request()->is("admin/sg-ssts*") ? "menu-open" : "" }} {{ request()->is("admin/plan-de-formacions*") ? "menu-open" : "" }} {{ request()->is("admin/evaluacion-de-desempenos*") ? "menu-open" : "" }} {{ request()->is("admin/certificado-laborals*") ? "menu-open" : "" }} {{ request()->is("admin/cerficadodefunciones*") ? "menu-open" : "" }} {{ request()->is("admin/*") ? "menu-open" : "" }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-marker">
 
@@ -105,6 +95,18 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('importar_empleado_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.importar-empleados.index") }}" class="nav-link {{ request()->is("admin/importar-empleados") || request()->is("admin/importar-empleados/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-user-check">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.importarEmpleado.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('hojas_de_vida_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.hojas-de-vidas.index") }}" class="nav-link {{ request()->is("admin/hojas-de-vidas") || request()->is("admin/hojas-de-vidas/*") ? "active" : "" }}">
@@ -527,7 +529,7 @@
                         <ul class="nav nav-treeview">
                             @can('schoolpack_access')
                                 <li class="nav-item">
-                                   <a href="http://colegiosanbartolome.infinite.com.co/infinite/spw.aspx" target="_blank" class="nav-link {{ request()->is("admin/schoolpacks") || request()->is("admin/schoolpacks/*") ? "active" : "" }}">
+                                    <a href="{{ route("admin.schoolpacks.index") }}" class="nav-link {{ request()->is("admin/schoolpacks") || request()->is("admin/schoolpacks/*") ? "active" : "" }}">
                                         <i class="fa-fw nav-icon fas fa-school">
 
                                         </i>
@@ -702,9 +704,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            
-                         <!-- se comenta estudio  por reelevante -->   
-                      {{-- @can('estudio_access')
+                            @can('estudio_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.estudios.index") }}" class="nav-link {{ request()->is("admin/estudios") || request()->is("admin/estudios/*") ? "active" : "" }}">
                                         <i class="fa-fw nav-icon fas fa-book-open">
@@ -715,10 +715,7 @@
                                         </p>
                                     </a>
                                 </li>
-                            @endcan --}}
-
-                            <!-- fin comentario estudio -->
-
+                            @endcan
                             @can('salario_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.salarios.index") }}" class="nav-link {{ request()->is("admin/salarios") || request()->is("admin/salarios/*") ? "active" : "" }}">

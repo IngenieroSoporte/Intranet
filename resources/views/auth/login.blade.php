@@ -4,20 +4,22 @@
     <div class="login-logo">
         <div class="login-logo">
             <a href="{{ route('admin.home') }}">
-                <img src="/img/logo-colegio.png" alt="" width="35%">
+                {{ trans('panel.site_title') }}
             </a>
         </div>
     </div>
-    <div class="card" style="background-color: rgba(255,255,255,0.5)">
+    <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg"></p>
+            <p class="login-box-msg">
+                {{ trans('global.login') }}
+            </p>
 
             @if(session()->has('message'))
                 <p class="alert alert-info">
                     {{ session()->get('message') }}
                 </p>
             @endif
-                
+
             <form action="{{ route('login') }}" method="POST">
                 @csrf
 
@@ -42,19 +44,18 @@
                 </div>
 
 
-                <div class="row text-center">
-                    <div class="col-12">
-                        <button type="submit" class=" rounded btn btn-primary btn-flat w-50">
-                            {{ trans('global.login') }}
-                        </button>
-                        <!--<a class="rounded btn btn-primary mt-3 text-white py-3" href="{{ trans('global.login') }}">Ingresar</a>-->
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember">{{ trans('global.remember_me') }}</label>
+                        </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-12">
-                        <button type="submit" class=" rounded btn btn-danger btn-flat mt-3 w-50">
-                            <a class="text-white" href="{{ url('auth/google') }}"> Ingresa con Google</a>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">
+                            {{ trans('global.login') }}
                         </button>
-                       <!-- <a class="rounded btn btn-danger mt-3 text-white fab fa-google py-3" href="{{ url('auth/google') }}"> Ingresa con Google</a>-->
                     </div>
                     <!-- /.col -->
                 </div>
@@ -62,21 +63,19 @@
 
 
             @if(Route::has('password.request'))
-                <p class="mb-1 mt-2 text-center">
-                    <a style="color:black; text-lign:center;" href="{{ route('password.request') }}">
+                <p class="mb-1">
+                    <a href="{{ route('password.request') }}">
                         {{ trans('global.forgot_password') }}
                     </a>
                 </p>
             @endif
             <p class="mb-1">
-
+                <a class="text-center" href="{{ route('register') }}">
+                    {{ trans('global.register') }}
+                </a>
             </p>
         </div>
-        <p class="mb-1 text-center mb-3" >
-            <a style="background: blue; color:white; padding:5px" class="text-center" href="{{ route('register') }}">
-                {{ trans('global.register') }}
-            </a>
-        </p>
+        <!-- /.login-card-body -->
     </div>
 </div>
 @endsection

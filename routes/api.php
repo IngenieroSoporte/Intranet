@@ -68,4 +68,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Formacion Academica Profesional
     Route::apiResource('formacion-academica-profesionals', 'FormacionAcademicaProfesionalApiController');
+
+    // Importar Empleados
+    Route::apiResource('importar-empleados', 'ImportarEmpleadosApiController');
 });
