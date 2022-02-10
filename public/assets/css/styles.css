@@ -1,0 +1,28 @@
+.centrado {
+  text-align: center;
+}
+
+.alineacion {
+  text-align: end;
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*top: 0;*/
+  /*width: 100%;*/
+}
+
+.container-fluid.alineacion-logo {
+  text-align: center;
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*top: 0;*/
+  /*width: 100%;*/
+}
+
+.container.alineacion {
+  text-align: center;
+}
+
+.container.alineacion-redes {
+  text-align: end;
+}
+
